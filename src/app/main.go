@@ -5,6 +5,8 @@ import (
 	"strings"
 	"app/lib/redis"
 	"app/core/config"
+	"app/lib/httpclient"
+	"io/ioutil"
 )
 
 func main() {
@@ -24,4 +26,18 @@ func main() {
 	baseRedis.Set("key", "val")
 	val, err := baseRedis.Get("key")
 	fmt.Println(val, err)
+
+	resp, err := httpclient.Client().Get("https://www.baidu.com")
+	if err != nil {
+		fmt.Println("Http error:", err)
+	}
+
+	respBytes, err := ioutil.ReadAll(resp.Body)
+	resp.Body.Close()
+
+	if err != nil {
+		fmt.Println("Body Reader error:", err)
+	}
+
+	fmt.Println(string(respBytes))
 }

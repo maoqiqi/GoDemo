@@ -41,8 +41,8 @@ func (h *HttpClient) Post(url string, contentType string, body io.Reader) (*http
 }
 
 // GET 请求
-func (h *HttpClient) Get(url string, body io.Reader) (*http.Response, error) {
-	req, err := http.NewRequest("GET", url, body)
+func (h *HttpClient) Get(url string) (*http.Response, error) {
+	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return nil, err
 	}
