@@ -7,9 +7,10 @@ import (
 	"app/core/config"
 	"app/lib/httpclient"
 	"io/ioutil"
+	"time"
 )
 
-func main() {
+func main1() {
 	// strings.Join 用法
 	arr := []string{"a", "b", "c", "d"}
 	str := strings.Join(arr, "--")
@@ -40,4 +41,21 @@ func main() {
 	}
 
 	fmt.Println(string(respBytes))
+}
+
+const FORMAT_TIME = "2006-01-02 15:04:05"
+
+func main2() {
+	now := time.Now()
+	fmt.Println("当前时间:", now)
+
+	// 1s之前的时间
+	negative1, _ := time.ParseDuration("-1s")
+	time1 := now.Add(negative1).Format(FORMAT_TIME)
+	fmt.Println("1s之前的时间:", time1)
+
+	// 3s之前的时间
+	negative3, _ := time.ParseDuration("-3s")
+	time3 := now.Add(negative3).Format(FORMAT_TIME)
+	fmt.Println("3s之前的时间:", time3)
 }
